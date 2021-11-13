@@ -4,11 +4,14 @@ project(register
         VERSION 1.0.0
         LANGUAGES CXX)
 
+include(cmake/StandardSettings.cmake)
+include(cmake/Tools.cmake)
+
 set(headers
-include/${PROJECT_NAME}/register.hpp)
+    include/${PROJECT_NAME}/register.hpp)
 
 set(sources
-src/register.cpp)
+    src/register.cpp)
 
 add_library(${PROJECT_NAME} SHARED ${headers} ${sources})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
