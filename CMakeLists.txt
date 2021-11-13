@@ -8,7 +8,9 @@ include(cmake/StandardSettings.cmake)
 include(cmake/Tools.cmake)
 
 set(headers
-    include/${PROJECT_NAME}/register.hpp)
+    include/${PROJECT_NAME}/common/type_traits.hpp
+    include/${PROJECT_NAME}/register.hpp
+)
 
 set(sources
     src/register.cpp)
