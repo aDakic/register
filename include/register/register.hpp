@@ -27,14 +27,14 @@ namespace reg
 
         template<typename T = AccessMode,
                  typename   = enable_if_t<is_same<T, read_only>::value || is_same<T, read_write>::value>>
-        operator uint8_t() const
+        operator reg_native_t() const
         {
             return *ptr;
         }
 
         template<typename T = AccessMode,
                  typename   = enable_if_t<is_same<T, write_only>::value || is_same<T, read_write>::value>>
-        register_t& operator=(uint8_t bit_mask)
+        register_t& operator=(reg_native_t bit_mask)
         {
             *ptr = bit_mask;
             return *this;
