@@ -1,5 +1,6 @@
 set(test_sources
-    test_bit_op.cpp)
+    test_bit_op.cpp
+    test_index_op.cpp)
 
 add_executable(test ${test_sources})
 

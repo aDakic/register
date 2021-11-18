@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "register/register.hpp"
 
 using reg8_t  = reg::register_t<8>;
