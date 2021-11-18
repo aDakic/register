@@ -13,6 +13,7 @@ file(GLOB_RECURSE ALL_SOURCE_FILES
   ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/common/*.hpp
   ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/*.hpp
   ${PROJECT_SOURCE_DIR}/src/*.cpp
+  ${PROJECT_SOURCE_DIR}/tests/*.cpp
 )
 
 find_program(${PROJECT_NAME}_CLANG_FORMAT_BINARY clang-format)

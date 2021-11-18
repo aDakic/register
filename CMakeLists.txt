@@ -27,3 +27,10 @@ target_include_directories(
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+#set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "time -v")
+#set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK "time -v")
+
+if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+        add_subdirectory(tests)
+endif()
