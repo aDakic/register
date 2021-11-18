@@ -142,3 +142,20 @@ TEST(test_index_op, const_index_operator_64)
     EXPECT_DEATH(creg[-1], "");
     EXPECT_DEATH(creg[64], "");
 }
+
+TEST(test_index_op, bit_proxy_assignment)
+{
+    reg::uint8_t reg_value = 0x00;
+    const auto reg_address = reinterpret_cast<uint64_t>(&reg_value);
+
+    reg8_t reg{ reg_address };
+
+    EXPECT_EQ(reg[0], 0);
+    EXPECT_EQ(reg[1], 0);
+
+    reg[0] = 1;
+    EXPECT_EQ(reg[0], 1);
+
+    reg[1] = reg[0];
+    EXPECT_EQ(reg[1], 1);
+}
