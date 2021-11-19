@@ -17,6 +17,7 @@ namespace reg
         {
         };
     }  // namespace access_modes
+
     template<size_t>
     struct register_native_type
     {
