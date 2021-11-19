@@ -51,6 +51,40 @@ namespace reg
         using type                   = uint64_t;
     };
 
+    namespace details
+    {
+        template<size_t>
+        struct register_address_type
+        {
+        };
+
+        template<>
+        struct register_address_type<1>
+        {
+            using type = uint8_t;
+        };
+
+        template<>
+        struct register_address_type<2>
+        {
+            using type = uint16_t;
+        };
+
+        template<>
+        struct register_address_type<4>
+        {
+            using type = uint32_t;
+        };
+
+        template<>
+        struct register_address_type<8>
+        {
+            using type = uint64_t;
+        };
+    }
+
+    using reg_addr_t = typename details::register_address_type<sizeof(void*)>::type;
+
     template<typename AccessModeTag>
     struct is_read_only
     {

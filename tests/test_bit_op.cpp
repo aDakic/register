@@ -10,7 +10,7 @@ using reg64_t = reg::register_t<64>;
 TEST(test_bit_op, basic_operation_8)
 {
     reg::uint8_t reg_value = 0xFF;
-    const auto reg_address = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
     reg8_t reg{ reg_address };
 
@@ -37,7 +37,7 @@ TEST(test_bit_op, basic_operation_8)
 TEST(test_bit_op, basic_operation_16)
 {
     reg::uint16_t reg_value = 0xFFFF;
-    const auto reg_address  = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address  = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
     reg16_t reg{ reg_address };
 
@@ -64,7 +64,7 @@ TEST(test_bit_op, basic_operation_16)
 TEST(test_bit_op, basic_operation_32)
 {
     reg::uint32_t reg_value = 0xFFFFFFFF;
-    const auto reg_address  = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address  = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
     reg32_t reg{ reg_address };
 
@@ -91,7 +91,7 @@ TEST(test_bit_op, basic_operation_32)
 TEST(test_bit_op, basic_operation_64)
 {
     reg::uint64_t reg_value = 0xFFFFFFFFEEEEEEEE;
-    const auto reg_address  = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address  = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
     reg64_t reg{ reg_address };
 

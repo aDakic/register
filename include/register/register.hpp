@@ -13,7 +13,7 @@ namespace reg
     public:
         using native_t = typename register_native_type<Size>::type;
 
-        explicit register_t(const uint64_t address) noexcept;
+        explicit register_t(const reg_addr_t address) noexcept;
         register_t(const register_t&) = delete;
         register_t(register_t&&)      = delete;
         register_t& operator=(const register_t&) = delete;
@@ -37,7 +37,7 @@ namespace reg
     // IMPLEMENTATION
 
     template<size_t Size, typename AccessMode>
-    register_t<Size, AccessMode>::register_t(const uint64_t address) noexcept : ptr{ reinterpret_cast<native_t*>(address) }
+    register_t<Size, AccessMode>::register_t(const reg_addr_t address) noexcept : ptr{ reinterpret_cast<native_t*>(address) }
     {
     }
 
