@@ -30,7 +30,7 @@ TEST(test_index_op, index_operator_8)
 TEST(test_index_op, const_index_operator_8)
 {
     constexpr reg::uint8_t reg_value = 0xFF;
-    const auto reg_address = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address           = reinterpret_cast<uint64_t>(&reg_value);
 
     const reg8_t creg{ reg_address };
 
@@ -64,7 +64,7 @@ TEST(test_index_op, index_operator_16)
 TEST(test_index_op, const_index_operator_16)
 {
     constexpr reg::uint16_t reg_value = 0xFFFF;
-    const auto reg_address  = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address            = reinterpret_cast<uint64_t>(&reg_value);
 
     const reg16_t creg{ reg_address };
 
@@ -98,7 +98,7 @@ TEST(test_index_op, index_operator_32)
 TEST(test_index_op, const_index_operator_32)
 {
     constexpr reg::uint32_t reg_value = 0xFFFFFFFF;
-    const auto reg_address  = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address            = reinterpret_cast<uint64_t>(&reg_value);
 
     const reg32_t creg{ reg_address };
 
@@ -132,7 +132,7 @@ TEST(test_index_op, index_operator_64)
 TEST(test_index_op, const_index_operator_64)
 {
     constexpr reg::uint64_t reg_value = 0xFFFFFFFFFFFFFFFF;
-    const auto reg_address  = reinterpret_cast<uint64_t>(&reg_value);
+    const auto reg_address            = reinterpret_cast<uint64_t>(&reg_value);
 
     const reg64_t creg{ reg_address };
 

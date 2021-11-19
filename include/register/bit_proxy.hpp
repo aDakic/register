@@ -26,10 +26,10 @@ namespace reg
                 *(owner->ptr) |= (1 << bit_num);
         }
 
-        bit_proxy_t& operator=(const bit_proxy_t& other) 
-        { 
-            *this = static_cast<native_t>(other); 
-            return *this; 
+        bit_proxy_t& operator=(const bit_proxy_t& other)
+        {
+            *this = static_cast<native_t>(other);
+            return *this;
         }
 
     private:

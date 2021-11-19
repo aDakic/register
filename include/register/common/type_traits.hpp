@@ -42,5 +42,7 @@ namespace reg
         template<typename T, typename U>
         inline constexpr bool is_same_v = is_same<T, U>::value;
 
+        template<typename... Ts>
+        static constexpr bool always_false = false;
     }  // namespace traits
 }  // namespace reg
