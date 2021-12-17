@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "register/register.hpp"
+#include "register/register_impl.hpp"
 
 using reg8_t  = reg::register_t<8>;
 using reg16_t = reg::register_t<16>;
