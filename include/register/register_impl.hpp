@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _REGISTER_IMPL_HPP_
+#define _REGISTER_IMPL_HPP_
 
 #include "bit_proxy.hpp"
 #include "common/assert.hpp"
@@ -124,3 +125,5 @@ namespace reg
         }
     }
 }  // namespace reg
+
+#endif  // _REGISTER_IMPL_HPP_

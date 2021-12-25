@@ -1,3 +1,6 @@
+#ifndef _REGISTER_HPP_
+#define _REGISTER_HPP_
+
 #include "register_impl.hpp"
 
 namespace reg
@@ -18,3 +21,5 @@ namespace reg
     using reg64_ro_t = register_t<64, access_modes::read_only>;
     using reg64_wo_t = register_t<64, access_modes::write_only>;
 }  // namespace reg
+
+#endif  // _REGISTER_HPP_

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _REGISTER_TRAITS_HPP_
+#define _REGISTER_TRAITS_HPP_
 
 #include "common/type_traits.hpp"
 #include "common/types.hpp"
@@ -130,3 +131,5 @@ namespace reg
     template<typename AccessModeTag>
     inline constexpr bool is_writeable_v = is_writeable<AccessModeTag>::value;
 }  // namespace reg
+
+#endif  // _REGISTER_TRAITS_HPP_

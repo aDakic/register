@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _BIT_PROXY_HPP_
+#define _BIT_PROXY_HPP_
 
 #include "register/common/types.hpp"
 
@@ -56,3 +57,5 @@ namespace reg
     }
 
 }  // namespace reg
+
+#endif  // _BIT_PROXY_HPP_

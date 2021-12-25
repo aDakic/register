@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _TYPE_TRAITS_HPP_
+#define _TYPE_TRAITS_HPP_
 
 namespace reg
 {
@@ -46,3 +47,5 @@ namespace reg
         static constexpr bool always_false = false;
     }  // namespace traits
 }  // namespace reg
+
+#endif  // _TYPE_TRAITS_HPP_
