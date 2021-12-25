@@ -15,9 +15,9 @@ namespace reg
         using native_t = typename reg_t::native_t;
 
         bit_proxy_t(reg_t* reg, size_t num) noexcept;
+        bit_proxy_t& operator   =(const bit_proxy_t& other) noexcept;
         ~bit_proxy_t() noexcept = default;
-        
-        bit_proxy_t& operator=(const bit_proxy_t& other) noexcept;
+
         void operator=(native_t val) noexcept;
         operator native_t() const noexcept;
 

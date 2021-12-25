@@ -17,4 +17,4 @@ namespace reg
     using reg64_rw_t = register_t<64, access_modes::read_write>;
     using reg64_ro_t = register_t<64, access_modes::read_only>;
     using reg64_wo_t = register_t<64, access_modes::write_only>;
-}
+}  // namespace reg

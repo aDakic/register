@@ -81,7 +81,7 @@ namespace reg
         {
             using type = uint64_t;
         };
-    }
+    }  // namespace details
 
     using reg_addr_t = typename details::register_address_type<sizeof(void*)>::type;
 
