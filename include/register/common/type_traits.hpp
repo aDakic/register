@@ -1,10 +1,21 @@
 #ifndef _TYPE_TRAITS_HPP_
 #define _TYPE_TRAITS_HPP_
 
+#if __has_include(<type_traits>)
+#include <type_traits>
+#endif
+
 namespace reg
 {
     namespace traits
     {
+#if __has_include(<type_traits>)
+        using std::enable_if;
+        using std::false_type;
+        using std::integral_constant;
+        using std::is_same;
+        using std::true_type;
+#else
         template<bool B, typename T = void>
         struct enable_if
         {
@@ -13,11 +24,8 @@ namespace reg
         template<typename T>
         struct enable_if<true, T>
         {
-            using type = T;
+            using type = T
         };
-
-        template<bool B, typename T = void>
-        using enable_if_t = typename enable_if<B, T>::type;
 
         template<typename T, T v>
         struct integral_constant
@@ -39,6 +47,9 @@ namespace reg
         struct is_same<T, T> : true_type
         {
         };
+#endif
+        template<bool B, typename T = void>
+        using enable_if_t = typename enable_if<B, T>::type;
 
         template<typename T, typename U>
         inline constexpr bool is_same_v = is_same<T, U>::value;

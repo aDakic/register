@@ -6,19 +6,6 @@
 
 namespace reg
 {
-    namespace access_modes
-    {
-        struct read_write
-        {
-        };
-        struct read_only
-        {
-        };
-        struct write_only
-        {
-        };
-    }  // namespace access_modes
-
     template<size_t>
     struct register_native_type
     {
@@ -85,6 +72,19 @@ namespace reg
     }  // namespace details
 
     using reg_addr_t = typename details::register_address_type<sizeof(void*)>::type;
+
+    namespace access_modes
+    {
+        struct read_write
+        {
+        };
+        struct read_only
+        {
+        };
+        struct write_only
+        {
+        };
+    }  // namespace access_modes
 
     template<typename AccessModeTag>
     struct is_read_only
