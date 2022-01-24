@@ -30,19 +30,19 @@ namespace reg
     // IMPLEMENTATION
 
     template<size_t Size, typename AccessModeTag>
-    bit_proxy_t<Size, AccessModeTag>::bit_proxy_t(reg_t* reg, size_t num) noexcept : owner{ reg }, bit_num{ num }
+    inline bit_proxy_t<Size, AccessModeTag>::bit_proxy_t(reg_t* reg, size_t num) noexcept : owner{ reg }, bit_num{ num }
     {
     }
 
     template<size_t Size, typename AccessModeTag>
-    bit_proxy_t<Size, AccessModeTag>& bit_proxy_t<Size, AccessModeTag>::operator=(const bit_proxy_t& other) noexcept
+    inline bit_proxy_t<Size, AccessModeTag>& bit_proxy_t<Size, AccessModeTag>::operator=(const bit_proxy_t& other) noexcept
     {
         *this = static_cast<native_t>(other);
         return *this;
     }
 
     template<size_t Size, typename AccessModeTag>
-    void bit_proxy_t<Size, AccessModeTag>::operator=(native_t val) noexcept
+    inline void bit_proxy_t<Size, AccessModeTag>::operator=(native_t val) noexcept
     {
         if (val == 0)
             *(owner->ptr) &= ~(1 << bit_num);
@@ -51,7 +51,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessModeTag>
-    bit_proxy_t<Size, AccessModeTag>::operator native_t() const noexcept
+    inline bit_proxy_t<Size, AccessModeTag>::operator native_t() const noexcept
     {
         return (*(owner->ptr) & (1 << bit_num)) ? 1 : 0;
     }

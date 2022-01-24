@@ -38,12 +38,12 @@ namespace reg
     // IMPLEMENTATION
 
     template<size_t Size, typename AccessMode>
-    register_t<Size, AccessMode>::register_t(const reg_addr_t address) noexcept : ptr{ reinterpret_cast<native_t*>(address) }
+    inline register_t<Size, AccessMode>::register_t(const reg_addr_t address) noexcept : ptr{ reinterpret_cast<native_t*>(address) }
     {
     }
 
     template<size_t Size, typename AccessMode>
-    register_t<Size, AccessMode>::operator native_t() const noexcept
+    inline register_t<Size, AccessMode>::operator native_t() const noexcept
     {
         if constexpr (is_readable_v<AccessMode>)
         {
@@ -56,7 +56,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator=(native_t bit_mask) noexcept
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator=(native_t bit_mask) noexcept
     {
         if constexpr (is_writeable_v<AccessMode>)
         {
@@ -70,7 +70,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator|=(native_t bit_mask) noexcept
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator|=(native_t bit_mask) noexcept
     {
         if constexpr (is_read_write_v<AccessMode>)
         {
@@ -84,7 +84,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator&=(native_t bit_mask) noexcept
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator&=(native_t bit_mask) noexcept
     {
         if constexpr (is_read_write_v<AccessMode>)
         {
@@ -98,7 +98,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) noexcept
+    inline bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) noexcept
     {
         if constexpr (is_read_write_v<AccessMode>)
         {
@@ -112,7 +112,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    const bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) const noexcept
+    inline const bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) const noexcept
     {
         if constexpr (is_readable_v<AccessMode>)
         {
