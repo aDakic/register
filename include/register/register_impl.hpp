@@ -12,7 +12,8 @@ namespace reg
     class register_t
     {
     public:
-        using native_t = typename register_native_type<Size>::type;
+        using reg_value_t = typename register_native_type<Size>::type;
+        using reg_ptr_t = reg_value_t*;
 
         explicit register_t(const reg_addr_t address) noexcept;
         register_t(const register_t&) = delete;
@@ -21,10 +22,10 @@ namespace reg
         register_t& operator=(register_t&&) = delete;
         ~register_t() noexcept              = default;
 
-        operator native_t() const noexcept;
-        register_t& operator=(native_t bit_mask) noexcept;
-        register_t& operator|=(native_t bit_mask) noexcept;
-        register_t& operator&=(native_t bit_mask) noexcept;
+        operator reg_value_t() const noexcept;
+        register_t& operator=(reg_value_t bit_mask) noexcept;
+        register_t& operator|=(reg_value_t bit_mask) noexcept;
+        register_t& operator&=(reg_value_t bit_mask) noexcept;
         bit_proxy_t<Size, AccessMode> operator[](size_t index) noexcept;
         const bit_proxy_t<Size, AccessMode> operator[](size_t index) const noexcept;
 
@@ -32,18 +33,18 @@ namespace reg
 
     private:
         friend bit_proxy_t<Size, AccessMode>;
-        volatile native_t* const ptr;
+        volatile reg_ptr_t const ptr;
     };
 
     // IMPLEMENTATION
 
     template<size_t Size, typename AccessMode>
-    inline register_t<Size, AccessMode>::register_t(const reg_addr_t address) noexcept : ptr{ reinterpret_cast<native_t*>(address) }
+    inline register_t<Size, AccessMode>::register_t(const reg_addr_t address) noexcept : ptr{ reinterpret_cast<reg_ptr_t>(address) }
     {
     }
 
     template<size_t Size, typename AccessMode>
-    inline register_t<Size, AccessMode>::operator native_t() const noexcept
+    inline register_t<Size, AccessMode>::operator reg_value_t() const noexcept
     {
         if constexpr (is_readable_v<AccessMode>)
         {
@@ -56,7 +57,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator=(native_t bit_mask) noexcept
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator=(reg_value_t bit_mask) noexcept
     {
         if constexpr (is_writeable_v<AccessMode>)
         {
@@ -70,7 +71,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator|=(native_t bit_mask) noexcept
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator|=(reg_value_t bit_mask) noexcept
     {
         if constexpr (is_read_write_v<AccessMode>)
         {
@@ -84,7 +85,7 @@ namespace reg
     }
 
     template<size_t Size, typename AccessMode>
-    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator&=(native_t bit_mask) noexcept
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator&=(reg_value_t bit_mask) noexcept
     {
         if constexpr (is_read_write_v<AccessMode>)
         {
