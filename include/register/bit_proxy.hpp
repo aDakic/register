@@ -12,7 +12,7 @@ namespace reg
     class bit_proxy_t
     {
     public:
-        using reg_t    = register_t<Size, AccessModeTag>;
+        using reg_t       = register_t<Size, AccessModeTag>;
         using reg_value_t = typename reg_t::reg_value_t;
 
         bit_proxy_t(reg_t* reg, size_t num) noexcept;
