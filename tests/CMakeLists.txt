@@ -7,7 +7,7 @@ add_executable(test ${test_sources})
 target_compile_features(
    test
    PUBLIC
-   cxx_std_17
+   cxx_std_11
 )
 
 find_package(GTest REQUIRED)

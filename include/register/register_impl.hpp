@@ -47,7 +47,7 @@ namespace reg
     template<size_t Size, typename AccessMode>
     inline register_t<Size, AccessMode>::operator reg_value_t() const noexcept
     {
-        static_assert(is_readable_v<AccessMode>, "Register doesn't provide read access.");
+        static_assert(is_readable<AccessMode>::value, "Register doesn't provide read access.");
 
         return *ptr;
     }
@@ -55,7 +55,7 @@ namespace reg
     template<size_t Size, typename AccessMode>
     inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator=(reg_value_t bit_mask) noexcept
     {
-        static_assert(is_writeable_v<AccessMode>, "Register doesn't provide write access.");
+        static_assert(is_writeable<AccessMode>::value, "Register doesn't provide write access.");
 
         *ptr = bit_mask;
         return *this;
@@ -64,7 +64,7 @@ namespace reg
     template<size_t Size, typename AccessMode>
     inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator|=(reg_value_t bit_mask) noexcept
     {
-        static_assert(is_read_write_v<AccessMode>, "Register doesn't provide read-write access.");
+        static_assert(is_read_write<AccessMode>::value, "Register doesn't provide read-write access.");
 
         *ptr |= bit_mask;
         return *this;
@@ -73,7 +73,7 @@ namespace reg
     template<size_t Size, typename AccessMode>
     inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator&=(reg_value_t bit_mask) noexcept
     {
-        static_assert(is_read_write_v<AccessMode>, "Register doesn't provide read-write access.");
+        static_assert(is_read_write<AccessMode>::value, "Register doesn't provide read-write access.");
 
         *ptr &= bit_mask;
         return *this;
@@ -82,7 +82,7 @@ namespace reg
     template<size_t Size, typename AccessMode>
     inline bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) noexcept
     {
-        static_assert(is_read_write_v<AccessMode>, "Register doesn't provide read-write access.");
+        static_assert(is_read_write<AccessMode>::value, "Register doesn't provide read-write access.");
         assert(index >= 0 && index < size);
 
         return { this, index };
@@ -91,7 +91,7 @@ namespace reg
     template<size_t Size, typename AccessMode>
     inline const bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) const noexcept
     {
-        static_assert(is_readable_v<AccessMode>, "Register doesn't provide read access.");
+        static_assert(is_readable<AccessMode>::value, "Register doesn't provide read access.");
         assert(index >= 0 && index < size);
 
         return { const_cast<register_t<Size, AccessMode>*>(this), index };

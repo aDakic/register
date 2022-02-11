@@ -93,16 +93,10 @@ namespace reg
     };
 
     template<typename AccessModeTag>
-    inline constexpr bool is_read_only_v = is_read_only<AccessModeTag>::value;
-
-    template<typename AccessModeTag>
     struct is_read_write
     {
         static constexpr bool value = traits::is_same<AccessModeTag, access_modes::read_write>::value;
     };
-
-    template<typename AccessModeTag>
-    inline constexpr bool is_read_write_v = is_read_write<AccessModeTag>::value;
 
     template<typename AccessModeTag>
     struct is_write_only
@@ -111,16 +105,10 @@ namespace reg
     };
 
     template<typename AccessModeTag>
-    inline constexpr bool is_write_only_v = is_write_only<AccessModeTag>::value;
-
-    template<typename AccessModeTag>
     struct is_readable
     {
         static constexpr bool value = is_read_only<AccessModeTag>::value || is_read_write<AccessModeTag>::value;
     };
-
-    template<typename AccessModeTag>
-    inline constexpr bool is_readable_v = is_readable<AccessModeTag>::value;
 
     template<typename AccessModeTag>
     struct is_writeable
@@ -128,8 +116,6 @@ namespace reg
         static constexpr bool value = is_write_only<AccessModeTag>::value || is_read_write<AccessModeTag>::value;
     };
 
-    template<typename AccessModeTag>
-    inline constexpr bool is_writeable_v = is_writeable<AccessModeTag>::value;
 }  // namespace reg
 
 #endif  // _REGISTER_TRAITS_HPP_
