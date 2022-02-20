@@ -45,15 +45,15 @@ namespace reg
     inline void bit_proxy_t<Size, AccessModeTag>::operator=(reg_value_t val) noexcept
     {
         if (val == 0)
-            *(owner->ptr) &= ~(1 << bit_num);
+            *(owner->ptr) &= ~(1ul << bit_num);
         else
-            *(owner->ptr) |= (1 << bit_num);
+            *(owner->ptr) |= (1ul << bit_num);
     }
 
     template<size_t Size, typename AccessModeTag>
     inline bit_proxy_t<Size, AccessModeTag>::operator reg_value_t() const noexcept
     {
-        return (*(owner->ptr) & (1 << bit_num)) ? 1 : 0;
+        return (*(owner->ptr) & (1ul << bit_num)) ? 1 : 0;
     }
 
 }  // namespace reg
