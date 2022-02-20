@@ -12,6 +12,10 @@ include(CMakePackageConfigHelpers)
 add_library(${PROJECT_NAME} INTERFACE)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
+if(${PROJECT_NAME}_ENABLE_STD_LIB)
+    add_compile_definitions(HAS_STD_LIB)
+endif()
+
 target_include_directories(
   ${PROJECT_NAME}
   INTERFACE $<BUILD_INTERFACE:${${PROJECT_NAME}_SOURCE_DIR}/include>

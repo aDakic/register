@@ -11,10 +11,9 @@ namespace reg
     {
 #ifdef HAS_STD_LIB
         using std::enable_if;
-        using std::false_type;
-        using std::integral_constant;
-        using std::is_same;
         using std::true_type;
+        using std::false_type;
+        using std::is_same;
 #else
         template<bool B, typename T = void>
         struct enable_if
@@ -50,12 +49,6 @@ namespace reg
 #endif
         template<bool B, typename T = void>
         using enable_if_t = typename enable_if<B, T>::type;
-
-        template<typename... Ts>
-        struct always_false
-        {
-            static constexpr bool value = false;
-        };
     }  // namespace traits
 }  // namespace reg
 
