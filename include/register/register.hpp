@@ -1,25 +1,101 @@
-#ifndef _REGISTER_HPP_
-#define _REGISTER_HPP_
+#ifndef _REGISTER_IMPL_HPP_
+#define _REGISTER_IMPL_HPP_
 
-#include "register_impl.hpp"
+#include "bit_proxy.hpp"
+#include "common/assert.hpp"
+#include "common/type_traits.hpp"
+#include "register_traits.hpp"
 
 namespace reg
 {
-    using reg8_rw_t = register_t<8, access_modes::read_write>;
-    using reg8_ro_t = register_t<8, access_modes::read_only>;
-    using reg8_wo_t = register_t<8, access_modes::write_only>;
+    template<size_t Size, typename AccessMode = access_modes::read_write>
+    class register_t
+    {
+    public:
+        using reg_value_t = typename register_native_type<Size>::type;
+        using reg_ptr_t   = reg_value_t*;
 
-    using reg16_rw_t = register_t<16, access_modes::read_write>;
-    using reg16_ro_t = register_t<16, access_modes::read_only>;
-    using reg16_wo_t = register_t<16, access_modes::write_only>;
+        explicit register_t(const reg_addr_t address) noexcept;
+        register_t(const register_t&) = delete;
+        register_t(register_t&&)      = delete;
+        register_t& operator=(const register_t&) = delete;
+        register_t& operator=(register_t&&) = delete;
+        ~register_t() noexcept              = default;
 
-    using reg32_rw_t = register_t<32, access_modes::read_write>;
-    using reg32_ro_t = register_t<32, access_modes::read_only>;
-    using reg32_wo_t = register_t<32, access_modes::write_only>;
+        operator reg_value_t() const noexcept;
+        register_t& operator=(reg_value_t bit_mask) noexcept;
+        register_t& operator|=(reg_value_t bit_mask) noexcept;
+        register_t& operator&=(reg_value_t bit_mask) noexcept;
+        bit_proxy_t<Size, AccessMode> operator[](size_t index) noexcept;
+        const bit_proxy_t<Size, AccessMode> operator[](size_t index) const noexcept;
 
-    using reg64_rw_t = register_t<64, access_modes::read_write>;
-    using reg64_ro_t = register_t<64, access_modes::read_only>;
-    using reg64_wo_t = register_t<64, access_modes::write_only>;
+        static constexpr size_t size = register_native_type<Size>::size;
+
+    private:
+        friend bit_proxy_t<Size, AccessMode>;
+        volatile reg_ptr_t const ptr;
+    };
+
+    // IMPLEMENTATION
+
+    template<size_t Size, typename AccessMode>
+    inline register_t<Size, AccessMode>::register_t(const reg_addr_t address) noexcept
+        : ptr{ reinterpret_cast<reg_ptr_t>(address) }
+    {
+    }
+
+    template<size_t Size, typename AccessMode>
+    inline register_t<Size, AccessMode>::operator reg_value_t() const noexcept
+    {
+        static_assert(is_readable<AccessMode>::value, "Register doesn't provide read access.");
+
+        return *ptr;
+    }
+
+    template<size_t Size, typename AccessMode>
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator=(reg_value_t bit_mask) noexcept
+    {
+        static_assert(is_writeable<AccessMode>::value, "Register doesn't provide write access.");
+
+        *ptr = bit_mask;
+        return *this;
+    }
+
+    template<size_t Size, typename AccessMode>
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator|=(reg_value_t bit_mask) noexcept
+    {
+        static_assert(is_read_write<AccessMode>::value, "Register doesn't provide read-write access.");
+
+        *ptr |= bit_mask;
+        return *this;
+    }
+
+    template<size_t Size, typename AccessMode>
+    inline register_t<Size, AccessMode>& register_t<Size, AccessMode>::operator&=(reg_value_t bit_mask) noexcept
+    {
+        static_assert(is_read_write<AccessMode>::value, "Register doesn't provide read-write access.");
+
+        *ptr &= bit_mask;
+        return *this;
+    }
+
+    template<size_t Size, typename AccessMode>
+    inline bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) noexcept
+    {
+        static_assert(is_read_write<AccessMode>::value, "Register doesn't provide read-write access.");
+        assert(index >= 0 && index < size);
+
+        return { this, index };
+    }
+
+    template<size_t Size, typename AccessMode>
+    inline const bit_proxy_t<Size, AccessMode> register_t<Size, AccessMode>::operator[](size_t index) const noexcept
+    {
+        static_assert(is_readable<AccessMode>::value, "Register doesn't provide read access.");
+        assert(index >= 0 && index < size);
+
+        return { const_cast<register_t<Size, AccessMode>*>(this), index };
+    }
 }  // namespace reg
 
-#endif  // _REGISTER_HPP_
+#endif  // _REGISTER_IMPL_HPP_

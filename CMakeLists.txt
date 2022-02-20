@@ -47,5 +47,6 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME} DESTINATION include)
 
 if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+        enable_testing()
         add_subdirectory(tests)
 endif()

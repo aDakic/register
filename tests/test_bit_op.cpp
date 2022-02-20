@@ -2,12 +2,17 @@
 
 #include "register/register.hpp"
 
+using reg8_rw_t = reg::register_t<8, reg::access_modes::read_write>;
+using reg16_rw_t = reg::register_t<16, reg::access_modes::read_write>;
+using reg32_rw_t = reg::register_t<32, reg::access_modes::read_write>;
+using reg64_rw_t = reg::register_t<64, reg::access_modes::read_write>;
+
 TEST(test_bit_op, basic_operation_8)
 {
     reg::uint8_t reg_value = 0xFF;
     const auto reg_address = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
-    reg::reg8_rw_t reg{ reg_address };
+    reg8_rw_t reg{ reg_address };
 
     // conversion operator
     reg::uint8_t data = reg;
@@ -34,7 +39,7 @@ TEST(test_bit_op, basic_operation_16)
     reg::uint16_t reg_value = 0xFFFF;
     const auto reg_address  = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
-    reg::reg16_rw_t reg{ reg_address };
+    reg16_rw_t reg{ reg_address };
 
     // conversion operator
     reg::uint16_t data = reg;
@@ -61,7 +66,7 @@ TEST(test_bit_op, basic_operation_32)
     reg::uint32_t reg_value = 0xFFFFFFFF;
     const auto reg_address  = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
-    reg::reg32_rw_t reg{ reg_address };
+    reg32_rw_t reg{ reg_address };
 
     // conversion operator
     reg::uint32_t data = reg;
@@ -88,7 +93,7 @@ TEST(test_bit_op, basic_operation_64)
     reg::uint64_t reg_value = 0xFFFFFFFFEEEEEEEE;
     const auto reg_address  = reinterpret_cast<reg::reg_addr_t>(&reg_value);
 
-    reg::reg64_rw_t reg{ reg_address };
+    reg64_rw_t reg{ reg_address };
 
     // conversion operator
     reg::uint64_t data = reg;
