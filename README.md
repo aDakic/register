@@ -41,24 +41,6 @@ The three main features of the library are:
   reg::uint8_t one = reg[5];
   ```
 
-## Types
-In order to simplify usage, the library provides the following types (aliases):
-Name  | Description
-------------- | -------------
-reg8_rw_t  | 8bit read-write register
-reg8_ro_t  | 8bit read-only register
-reg8_wo_t  | 8bit write-only register
-reg16_rw_t  | 16bit read-write register
-reg16_ro_t  | 16bit read-only register
-reg16_wo_t  | 16bit write-only register
-reg32_rw_t  | 32bit read-write register
-reg32_ro_t  | 32bit read-only register
-reg32_wo_t  | 32bit write-only register
-reg64_rw_t  | 64bit read-write register
-reg64_ro_t  | 64bit read-only register
-reg64_wo_t  | 64bit write-only register
-
-
 ## From C to Modern C++
 The LED blink example implemented in C:
 ```cpp
