@@ -2,7 +2,7 @@
 
 #include "register/register.hpp"
 
-using reg8_rw_t = reg::register_t<8, reg::access_modes::read_write>;
+using reg8_rw_t  = reg::register_t<8, reg::access_modes::read_write>;
 using reg16_rw_t = reg::register_t<16, reg::access_modes::read_write>;
 using reg32_rw_t = reg::register_t<32, reg::access_modes::read_write>;
 using reg64_rw_t = reg::register_t<64, reg::access_modes::read_write>;
@@ -64,7 +64,7 @@ TEST(test_index_op, const_index_operator_16)
 }
 
 TEST(test_index_op, index_operator_32)
-{  
+{
     reg::uint32_t reg_value = 0xFFFFFFFF;
     const auto reg_address  = reinterpret_cast<uint64_t>(&reg_value);
 
@@ -109,7 +109,7 @@ TEST(test_index_op, index_operator_64)
 }
 
 TEST(test_index_op, const_index_operator_64)
-{ 
+{
     constexpr reg::uint64_t reg_value = 0xFFFFFFFFFFFFFFFF;
     const auto reg_address            = reinterpret_cast<uint64_t>(&reg_value);
 

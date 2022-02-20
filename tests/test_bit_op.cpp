@@ -2,7 +2,7 @@
 
 #include "register/register.hpp"
 
-using reg8_rw_t = reg::register_t<8, reg::access_modes::read_write>;
+using reg8_rw_t  = reg::register_t<8, reg::access_modes::read_write>;
 using reg16_rw_t = reg::register_t<16, reg::access_modes::read_write>;
 using reg32_rw_t = reg::register_t<32, reg::access_modes::read_write>;
 using reg64_rw_t = reg::register_t<64, reg::access_modes::read_write>;
